@@ -178,7 +178,7 @@ class Minimercado
             else
             {
                 intentos++;
-                Console.WriteLine($"✗ Usuario o contraseña incorrectos. Intentos restantes: {maxIntentos - intentos}");
+                Console.WriteLine($"Usuario o contraseña incorrectos. Intentos restantes: {maxIntentos - intentos}");
             }
         }
 
@@ -353,7 +353,7 @@ class Minimercado
                 else
                 {
                     carrritoCantidades[i] = carrritoCantidades[i] + cantidad;
-                    Console.WriteLine($"✓ Cantidad actualizada: {carrritoCantidades[i]}x {carritoNombres[i]}");
+                    Console.WriteLine($"Cantidad actualizada: {carrritoCantidades[i]}x {carritoNombres[i]}");
                 }
 
                 yaEstaba = true;
@@ -367,7 +367,7 @@ class Minimercado
             carritoNombres.Add(productoNombres[indice]);
             carritoPrecios.Add(productoPrecios[indice]);
             carrritoCantidades.Add(cantidad);
-            Console.WriteLine($"✓ Agregado: {cantidad}x {productoNombres[indice]} - ${productoPrecios[indice] * cantidad:N0}");
+            Console.WriteLine($"Agregado: {cantidad}x {productoNombres[indice]} - ${productoPrecios[indice] * cantidad:N0}");
         }
     }
 
@@ -433,7 +433,7 @@ class Minimercado
         carritoPrecios.RemoveAt(indice);
         carrritoCantidades.RemoveAt(indice);
 
-        Console.WriteLine($"✓ '{nombre}' eliminado del carrito.");
+        Console.WriteLine($" '{nombre}' eliminado del carrito.");
     }
 
 
@@ -518,13 +518,13 @@ class Minimercado
     {
         Console.WriteLine();
         Console.WriteLine("╔══════════════════════════════════════════════════╗");
-        Console.WriteLine("║              MINIMERCADO TECH                   ║");
-        Console.WriteLine("║          NIT: 900.123.456-7                     ║");
-        Console.WriteLine("║       Calle 45 #23-10, Medellin                 ║");
+        Console.WriteLine("║              MINIMERCADO TECH                    ║");
+        Console.WriteLine("║          NIT: 900.123.456-7                      ║");
+        Console.WriteLine("║       Calle 45 #23-10, Medellin                  ║");
         Console.WriteLine("╠══════════════════════════════════════════════════╣");
-        Console.WriteLine($"║  Factura N°: {numero:D6}                            ║");
-        Console.WriteLine($"║  Fecha: {fecha}               ║");
-        Console.WriteLine($"║  Cliente: {cliente,-38}║");
+        Console.WriteLine($"║  Factura N°: {numero:D6}                        ║");
+        Console.WriteLine($"║  Fecha: {fecha}                                 ║");
+        Console.WriteLine($"║  Cliente: {cliente,-38}                         ║");
         Console.WriteLine("╠══════════════════════════════════════════════════╣");
         Console.WriteLine($"║  {"Producto",-24} {"Cant",4} {"P.Unit",10} {"Subtotal",9} ║");
         Console.WriteLine("╠══════════════════════════════════════════════════╣");
@@ -578,7 +578,7 @@ class Minimercado
             escritor.WriteLine($"TOTAL: ${total:N0}");
         }
 
-        Console.WriteLine($"\n✓ Factura guardada en: {nombreArchivo}");
+        Console.WriteLine($"\n Factura guardada en: {nombreArchivo}");
     }
 
 
