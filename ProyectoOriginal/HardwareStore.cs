@@ -57,7 +57,7 @@ class Minimercado
 
         Login();
 
-        Console.WriteLine("\n--- DEMO DEL SISTEMA ---\n");
+        Console.WriteLine("\n--- Entrando al sistema ---\n");
 
         MostrarCatalogo();
         Console.WriteLine();
