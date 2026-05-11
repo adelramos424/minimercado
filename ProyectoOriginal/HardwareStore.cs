@@ -4,33 +4,33 @@ using System.IO;
 
 class Minimercado
 {
-    // ============================================================
-    // LISTAS - PRODUCTOS
-    // ============================================================
+
+    // LISTAS PARALELAS - PRODUCTOS
+
     static List<int> productoIds = new List<int>();
     static List<string> productoNombres = new List<string>();
     static List<string> productoCategorias = new List<string>();
     static List<double> productoPrecios = new List<double>();
     static List<int> productoStocks = new List<int>();
 
-    // ============================================================
+
     // LISTAS PARALELAS - USUARIOS
-    // ============================================================
+
     static List<string> usuarioUsernames = new List<string>();
     static List<string> usuarioPasswords = new List<string>();
     static List<string> usuarioRoles = new List<string>();
 
-    // ============================================================
+
     // LISTAS PARALELAS - CARRITO
-    // ============================================================
+
     static List<int> carritoIds = new List<int>();
     static List<string> carritoNombres = new List<string>();
     static List<double> carritoPrecios = new List<double>();
     static List<int> carrritoCantidades = new List<int>();
 
-    // ============================================================
+
     // LISTAS PARALELAS - REGISTRO DE VENTAS
-    // ============================================================
+
     static List<int> ventaNumeros = new List<int>();
     static List<string> ventaClientes = new List<string>();
     static List<string> ventaFechas = new List<string>();
@@ -42,9 +42,9 @@ class Minimercado
     static bool sesionActiva = false;
     static int contadorVentas = 1;
 
-    // ============================================================
+
     // MAIN
-    // ============================================================
+
     static void Main(string[] args)
     {
         CargarDatosIniciales();
@@ -77,9 +77,9 @@ class Minimercado
         MostrarRegistroVentas();
     }
 
-    // ============================================================
+
     // FUNCIÓN: CARGAR DATOS INICIALES
-    // ============================================================
+
     static void CargarDatosIniciales()
     {
         usuarioUsernames.Add("admin"); usuarioPasswords.Add("admin123"); usuarioRoles.Add("admin");
@@ -107,9 +107,9 @@ class Minimercado
         productoStocks.Add(stock);
     }
 
-    // ============================================================
+
     // FUNCIÓN: LOGIN
-    // ============================================================
+
     static void Login()
     {
         Console.WriteLine("=== INICIO DE SESIÓN ===");
@@ -157,9 +157,9 @@ class Minimercado
         }
     }
 
-    // ============================================================
+
     // FUNCIÓN: LEER PASSWORD OCULTA
-    // ============================================================
+
     static string LeerPasswordOculta()
     {
         string password = "";
@@ -188,9 +188,9 @@ class Minimercado
         return password;
     }
 
-    // ============================================================
+
     // FUNCIÓN: CERRAR SESIÓN
-    // ============================================================
+
     static void CerrarSesion()
     {
         Console.WriteLine($"Cerrando sesion de {usuarioActual}...");
@@ -201,9 +201,9 @@ class Minimercado
         Console.WriteLine("Sesion cerrada. Hasta pronto!");
     }
 
-    // ============================================================
+
     // FUNCIÓN: MOSTRAR CATÁLOGO
-    // ============================================================
+
     static void MostrarCatalogo()
     {
         Console.WriteLine("=== CATALOGO DE PRODUCTOS ===");
@@ -219,9 +219,9 @@ class Minimercado
         Console.WriteLine($"Total de productos: {productoIds.Count}");
     }
 
-    // ============================================================
+
     // FUNCIÓN: BUSCAR PRODUCTO
-    // ============================================================
+
     static void BuscarProducto()
     {
         Console.WriteLine("=== BUSCADOR DE PRODUCTOS ===");
@@ -252,9 +252,8 @@ class Minimercado
         Console.WriteLine(new string('-', 70));
     }
 
-    // ============================================================
     // FUNCIÓN AUXILIAR: BUSCAR ÍNDICE DE PRODUCTO POR ID
-    // ============================================================
+
     static int BuscarIndicePorId(int id)
     {
         for (int i = 0; i < productoIds.Count; i++)
@@ -267,9 +266,9 @@ class Minimercado
         return -1;
     }
 
-    // ============================================================
+
     // FUNCIÓN: AGREGAR AL CARRITO
-    // ============================================================
+
     static void AgregarAlCarrito()
     {
         Console.WriteLine("=== AGREGAR AL CARRITO ===");
@@ -340,9 +339,9 @@ class Minimercado
         }
     }
 
-    // ============================================================
+
     // FUNCIÓN: MOSTRAR CARRITO
-    // ============================================================
+
     static void MostrarCarrito()
     {
         Console.WriteLine("=== CARRITO DE COMPRAS ===");
@@ -369,9 +368,9 @@ class Minimercado
         Console.WriteLine($"{"TOTAL:",-52} ${total,13:N0}");
     }
 
-    // ============================================================
+
     // FUNCIÓN: ELIMINAR DEL CARRITO
-    // ============================================================
+
     static void EliminarDelCarrito()
     {
         if (carritoIds.Count == 0)
@@ -405,9 +404,9 @@ class Minimercado
         Console.WriteLine($"✓ '{nombre}' eliminado del carrito.");
     }
 
-    // ============================================================
+
     // FUNCIÓN AUXILIAR: CALCULAR TOTAL DEL CARRITO
-    // ============================================================
+
     static double CalcularTotalCarrito()
     {
         double total = 0;
@@ -420,9 +419,9 @@ class Minimercado
         return total;
     }
 
-    // ============================================================
+
     // FUNCIÓN AUXILIAR: LIMPIAR CARRITO
-    // ============================================================
+
     static void LimpiarCarrito()
     {
         carritoIds.Clear();
@@ -431,9 +430,9 @@ class Minimercado
         carrritoCantidades.Clear();
     }
 
-    // ============================================================
+
     // FUNCIÓN: REALIZAR COMPRA
-    // ============================================================
+
     static void RealizarCompra()
     {
         Console.WriteLine("=== PROCESO DE COMPRA ===");
@@ -480,9 +479,9 @@ class Minimercado
         LimpiarCarrito();
     }
 
-    // ============================================================
+
     // FUNCIÓN: IMPRIMIR FACTURA EN CONSOLA
-    // ============================================================
+
     static void ImprimirFactura(int numero, string cliente, string fecha, double total)
     {
         Console.WriteLine();
@@ -522,9 +521,9 @@ class Minimercado
         Console.WriteLine("     Gracias por su compra en MinimercadoTech!    ");
     }
 
-    // ============================================================
+
     // FUNCIÓN: GUARDAR FACTURA EN ARCHIVO .TXT
-    // ============================================================
+
     static void GuardarFacturaEnArchivo(int numero, string cliente, string fecha, double total)
     {
         string nombreArchivo = $"factura_{numero:D6}.txt";
@@ -550,9 +549,9 @@ class Minimercado
         Console.WriteLine($"\n✓ Factura guardada en: {nombreArchivo}");
     }
 
-    // ============================================================
+
     // FUNCIÓN: MOSTRAR REGISTRO DE VENTAS
-    // ============================================================
+
     static void MostrarRegistroVentas()
     {
         Console.WriteLine("=== REGISTRO DE VENTAS ===");
