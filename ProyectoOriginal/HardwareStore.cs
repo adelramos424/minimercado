@@ -7,40 +7,40 @@ class Minimercado
     // ============================================================
     // LISTAS PARALELAS - PRODUCTOS
     // ============================================================
-    static List<int>    productoIds        = new List<int>();
-    static List<string> productoNombres    = new List<string>();
+    static List<int> productoIds = new List<int>();
+    static List<string> productoNombres = new List<string>();
     static List<string> productoCategorias = new List<string>();
-    static List<double> productoPrecios    = new List<double>();
-    static List<int>    productoStocks     = new List<int>();
+    static List<double> productoPrecios = new List<double>();
+    static List<int> productoStocks = new List<int>();
 
     // ============================================================
     // LISTAS PARALELAS - USUARIOS
     // ============================================================
     static List<string> usuarioUsernames = new List<string>();
     static List<string> usuarioPasswords = new List<string>();
-    static List<string> usuarioRoles     = new List<string>();
+    static List<string> usuarioRoles = new List<string>();
 
     // ============================================================
     // LISTAS PARALELAS - CARRITO
     // ============================================================
-    static List<int>    carritoIds        = new List<int>();
-    static List<string> carritoNombres    = new List<string>();
-    static List<double> carritoPrecios    = new List<double>();
-    static List<int>    carrritoCantidades = new List<int>();
+    static List<int> carritoIds = new List<int>();
+    static List<string> carritoNombres = new List<string>();
+    static List<double> carritoPrecios = new List<double>();
+    static List<int> carrritoCantidades = new List<int>();
 
     // ============================================================
     // LISTAS PARALELAS - REGISTRO DE VENTAS
     // ============================================================
-    static List<int>    ventaNumeros  = new List<int>();
+    static List<int> ventaNumeros = new List<int>();
     static List<string> ventaClientes = new List<string>();
-    static List<string> ventaFechas   = new List<string>();
-    static List<double> ventaTotales  = new List<double>();
+    static List<string> ventaFechas = new List<string>();
+    static List<double> ventaTotales = new List<double>();
 
     // Variables de sesion
-    static string usuarioActual  = "";
-    static string rolActual      = "";
-    static bool   sesionActiva   = false;
-    static int    contadorVentas = 1;
+    static string usuarioActual = "";
+    static string rolActual = "";
+    static bool sesionActiva = false;
+    static int contadorVentas = 1;
 
     // ============================================================
     // MAIN
@@ -50,7 +50,7 @@ class Minimercado
         CargarDatosIniciales();
 
         Console.WriteLine("╔══════════════════════════════════╗");
-        Console.WriteLine("║     MINIMERCADO TECH  v1.0       ║");
+        Console.WriteLine("║       MINIMERCADO TECH           ║");
         Console.WriteLine("║    Tu tienda de computadoras     ║");
         Console.WriteLine("╚══════════════════════════════════╝");
         Console.WriteLine();
@@ -82,20 +82,20 @@ class Minimercado
     // ============================================================
     static void CargarDatosIniciales()
     {
-        usuarioUsernames.Add("admin");     usuarioPasswords.Add("admin123");  usuarioRoles.Add("admin");
-        usuarioUsernames.Add("cliente1");  usuarioPasswords.Add("pass123");   usuarioRoles.Add("cliente");
-        usuarioUsernames.Add("carlos");    usuarioPasswords.Add("carlos456"); usuarioRoles.Add("cliente");
+        usuarioUsernames.Add("admin"); usuarioPasswords.Add("admin123"); usuarioRoles.Add("admin");
+        usuarioUsernames.Add("cliente1"); usuarioPasswords.Add("pass123"); usuarioRoles.Add("cliente");
+        usuarioUsernames.Add("carlos"); usuarioPasswords.Add("carlos456"); usuarioRoles.Add("cliente");
 
-        AgregarProducto(1,  "Teclado Mecanico RGB",     "Perifericos", 250000,  15);
-        AgregarProducto(2,  "Mouse Gamer 16000 DPI",    "Perifericos", 180000,  20);
-        AgregarProducto(3,  "Monitor 24 Full HD",       "Monitores",   850000,   8);
-        AgregarProducto(4,  "RAM DDR4 16GB",            "Hardware",    320000,  25);
-        AgregarProducto(5,  "SSD 500GB NVMe",           "Hardware",    280000,  18);
-        AgregarProducto(6,  "Tarjeta Grafica RTX 3060", "Hardware",   1950000,   5);
-        AgregarProducto(7,  "Audifonos Gaming 7.1",     "Perifericos", 220000,  12);
-        AgregarProducto(8,  "Webcam Full HD 1080p",     "Perifericos", 150000,  10);
-        AgregarProducto(9,  "Procesador Ryzen 5 5600",  "Hardware",    780000,   7);
-        AgregarProducto(10, "Fuente de Poder 650W",     "Hardware",    340000,   9);
+        AgregarProducto(1, "Teclado Mecanico RGB", "Perifericos", 250000, 15);
+        AgregarProducto(2, "Mouse Gamer 16000 DPI", "Perifericos", 180000, 20);
+        AgregarProducto(3, "Monitor 24 Full HD", "Monitores", 850000, 8);
+        AgregarProducto(4, "RAM DDR4 16GB", "Hardware", 320000, 25);
+        AgregarProducto(5, "SSD 500GB NVMe", "Hardware", 280000, 18);
+        AgregarProducto(6, "Tarjeta Grafica RTX 3060", "Hardware", 1950000, 5);
+        AgregarProducto(7, "Audifonos Gaming 7.1", "Perifericos", 220000, 12);
+        AgregarProducto(8, "Webcam Full HD 1080p", "Perifericos", 150000, 10);
+        AgregarProducto(9, "Procesador Ryzen 5 5600", "Hardware", 780000, 7);
+        AgregarProducto(10, "Fuente de Poder 650W", "Hardware", 340000, 9);
     }
 
     static void AgregarProducto(int id, string nombre, string categoria, double precio, int stock)
@@ -114,7 +114,7 @@ class Minimercado
     {
         Console.WriteLine("=== INICIO DE SESIÓN ===");
 
-        int intentos    = 0;
+        int intentos = 0;
         int maxIntentos = 3;
 
         while (!sesionActiva && intentos < maxIntentos)
@@ -138,9 +138,9 @@ class Minimercado
 
             if (indiceEncontrado != -1)
             {
-                sesionActiva  = true;
+                sesionActiva = true;
                 usuarioActual = usuarioUsernames[indiceEncontrado];
-                rolActual     = usuarioRoles[indiceEncontrado];
+                rolActual = usuarioRoles[indiceEncontrado];
                 Console.WriteLine($"\n✓ Bienvenido, {usuarioActual}! (Rol: {rolActual})");
             }
             else
@@ -194,9 +194,9 @@ class Minimercado
     static void CerrarSesion()
     {
         Console.WriteLine($"Cerrando sesion de {usuarioActual}...");
-        sesionActiva  = false;
+        sesionActiva = false;
         usuarioActual = "";
-        rolActual     = "";
+        rolActual = "";
         LimpiarCarrito();
         Console.WriteLine("Sesion cerrada. Hasta pronto!");
     }
@@ -234,7 +234,7 @@ class Minimercado
 
         for (int i = 0; i < productoIds.Count; i++)
         {
-            bool coincideNombre    = productoNombres[i].ToLower().Contains(termino);
+            bool coincideNombre = productoNombres[i].ToLower().Contains(termino);
             bool coincideCategoria = productoCategorias[i].ToLower().Contains(termino);
 
             if (coincideNombre || coincideCategoria)
