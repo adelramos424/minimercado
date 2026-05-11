@@ -5,7 +5,7 @@ using System.IO;
 class Minimercado
 {
     // ============================================================
-    // LISTAS PARALELAS - PRODUCTOS
+    // LISTAS - PRODUCTOS
     // ============================================================
     static List<int> productoIds = new List<int>();
     static List<string> productoNombres = new List<string>();
