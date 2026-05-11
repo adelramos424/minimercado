@@ -48,33 +48,65 @@ class Minimercado
     static void Main(string[] args)
     {
         CargarDatosIniciales();
+        bool salir = false;
 
-        Console.WriteLine("╔══════════════════════════════════╗");
-        Console.WriteLine("║       MINIMERCADO TECH           ║");
-        Console.WriteLine("║    Tu tienda de computadoras     ║");
-        Console.WriteLine("╚══════════════════════════════════╝");
-        Console.WriteLine();
-
+        // El Login se queda fuera del bucle para que solo ocurra una vez al entrar
         Login();
 
-        Console.WriteLine("\n--- Entrando al sistema ---\n");
+        while (!salir)
+        {
+            Console.Clear();
+            Console.WriteLine("╔══════════════════════════════════╗");
+            Console.WriteLine("║       MINIMERCADO TECH           ║");
+            Console.WriteLine("║    Tu tienda de computadoras     ║");
+            Console.WriteLine("╚══════════════════════════════════╝");
+            Console.WriteLine("1. Mostrar Catálogo");
+            Console.WriteLine("2. Buscar Producto");
+            Console.WriteLine("3. Agregar al Carrito");
+            Console.WriteLine("4. Ver Carrito");
+            Console.WriteLine("5. Realizar Compra");
+            Console.WriteLine("6. Ver Registro de Ventas");
+            Console.WriteLine("7. Salir");
+            Console.WriteLine("────────────────────────────────────");
+            Console.Write("Seleccione una opción: ");
 
-        MostrarCatalogo();
-        Console.WriteLine();
+            string opcion = Console.ReadLine();
 
-        BuscarProducto();
-        Console.WriteLine();
+            switch (opcion)
+            {
+                case "1":
+                    MostrarCatalogo();
+                    break;
+                case "2":
+                    BuscarProducto();
+                    break;
+                case "3":
+                    AgregarAlCarrito();
+                    break;
+                case "4":
+                    MostrarCarrito();
+                    break;
+                case "5":
+                    RealizarCompra();
+                    break;
+                case "6":
+                    MostrarRegistroVentas();
+                    break;
+                case "7":
+                    Console.WriteLine("Gracias por visitar Minimercado Tech");
+                    salir = true;
+                    break;
+                default:
+                    Console.WriteLine("Opción no válida. Intente de nuevo.");
+                    break;
+            }
 
-        AgregarAlCarrito();
-        Console.WriteLine();
-
-        MostrarCarrito();
-        Console.WriteLine();
-
-        RealizarCompra();
-        Console.WriteLine();
-
-        MostrarRegistroVentas();
+            if (!salir)
+            {
+                Console.WriteLine("\nPresione cualquier tecla para volver al menú...");
+                Console.ReadKey();
+            }
+        }
     }
 
 
