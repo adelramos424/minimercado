@@ -5,34 +5,22 @@ using ClosedXML.Excel;   // Librería para Excel - se instala via NuGet
 
 class Minimercado
 {
-    // ============================================================
-    // LISTAS PARALELAS - PRODUCTOS
-    // ============================================================
     static List<int>    productoIds        = new List<int>();
     static List<string> productoNombres    = new List<string>();
     static List<string> productoCategorias = new List<string>();
     static List<double> productoPrecios    = new List<double>();
     static List<int>    productoStocks     = new List<int>();
 
-    // ============================================================
-    // LISTAS PARALELAS - USUARIOS
-    // ============================================================
     static List<string> usuarioUsernames = new List<string>();
     static List<string> usuarioPasswords = new List<string>();
     static List<string> usuarioRoles     = new List<string>();
     static List<string> usuarioNombres   = new List<string>();
 
-    // ============================================================
-    // LISTAS PARALELAS - CARRITO
-    // ============================================================
     static List<int>    carritoIds         = new List<int>();
     static List<string> carritoNombres     = new List<string>();
     static List<double> carritoPrecios     = new List<double>();
     static List<int>    carrritoCantidades = new List<int>();
 
-    // ============================================================
-    // LISTAS PARALELAS - REGISTRO DE VENTAS
-    // ============================================================
     static List<int>    ventaNumeros  = new List<int>();
     static List<string> ventaClientes = new List<string>();
     static List<string> ventaFechas   = new List<string>();
@@ -40,16 +28,12 @@ class Minimercado
     static List<string> ventaMetodos  = new List<string>();
     static List<string> ventaDetalles = new List<string>();
 
-    // Variables de sesion
     static string usuarioActual  = "";
     static string rolActual      = "";
     static string nombreActual   = "";
     static bool   sesionActiva   = false;
     static int    contadorVentas = 1;
 
-    // ============================================================
-    // MAIN
-    // ============================================================
     static void Main(string[] args)
     {
         CargarDatosIniciales();
@@ -64,43 +48,38 @@ class Minimercado
         else if (rolActual == "cliente")  MenuCliente();
     }
 
-    // ============================================================
-    // MENÚ: ADMINISTRADOR
-    // ============================================================
     static void MenuAdmin()
     {
         bool salir = false;
         while (salir == false)
         {
             Console.Clear();
-            Console.WriteLine("╔══════════════════════════════════════╗");
-            Console.WriteLine("║        MINIMERCADO TECH              ║");
-            Console.WriteLine("║       Panel Administrador            ║");
-            Console.WriteLine($"║  Usuario: {nombreActual,-26}║");
-            Console.WriteLine("╠══════════════════════════════════════╣");
-            Console.WriteLine("║  --- PRODUCTOS ---                   ║");
-            Console.WriteLine("║  1.  Ver Catalogo                    ║");
-            Console.WriteLine("║  2.  Agregar Producto                ║");
-            Console.WriteLine("║  3.  Editar Producto                 ║");
-            Console.WriteLine("║  4.  Eliminar Producto               ║");
-            Console.WriteLine("║  5.  Buscar Producto                 ║");
-            Console.WriteLine("╠══════════════════════════════════════╣");
-            Console.WriteLine("║  --- VENTAS ---                      ║");
-            Console.WriteLine("║  6.  Ver Registro de Ventas          ║");
-            Console.WriteLine("║  7.  Estadisticas y Balance          ║");
-            Console.WriteLine("╠══════════════════════════════════════╣");
-            Console.WriteLine("║  --- USUARIOS ---                    ║");
-            Console.WriteLine("║  8.  Ver Usuarios                    ║");
-            Console.WriteLine("║  9.  Agregar Usuario                 ║");
-            Console.WriteLine("║  10. Editar Usuario                  ║");
-            Console.WriteLine("║  11. Eliminar Usuario                ║");
-            Console.WriteLine("╠══════════════════════════════════════╣");
-            Console.WriteLine("║  --- EXCEL ---                       ║");
-            Console.WriteLine("║  12. Exportar Inventario a Excel     ║");
-            Console.WriteLine("║  13. Importar Inventario desde Excel ║");
-            Console.WriteLine("╠══════════════════════════════════════╣");
-            Console.WriteLine("║  0.  Cerrar Sesion                   ║");
-            Console.WriteLine("╚══════════════════════════════════════╝");
+            Console.WriteLine("MINIMERCADO TECH - Panel Administrador");
+            Console.WriteLine($"Usuario: {nombreActual}");
+            Console.WriteLine();
+            Console.WriteLine("--- PRODUCTOS ---");
+            Console.WriteLine("1.  Ver Catalogo");
+            Console.WriteLine("2.  Agregar Producto");
+            Console.WriteLine("3.  Editar Producto");
+            Console.WriteLine("4.  Eliminar Producto");
+            Console.WriteLine("5.  Buscar Producto");
+            Console.WriteLine();
+            Console.WriteLine("--- VENTAS ---");
+            Console.WriteLine("6.  Ver Registro de Ventas");
+            Console.WriteLine("7.  Estadisticas y Balance");
+            Console.WriteLine();
+            Console.WriteLine("--- USUARIOS ---");
+            Console.WriteLine("8.  Ver Usuarios");
+            Console.WriteLine("9.  Agregar Usuario");
+            Console.WriteLine("10. Editar Usuario");
+            Console.WriteLine("11. Eliminar Usuario");
+            Console.WriteLine();
+            Console.WriteLine("--- EXCEL ---");
+            Console.WriteLine("12. Exportar Inventario a Excel");
+            Console.WriteLine("13. Importar Inventario desde Excel");
+            Console.WriteLine();
+            Console.WriteLine("0.  Cerrar Sesion");
+            Console.WriteLine();
             Console.Write("Seleccione una opcion: ");
 
             string opcion = Console.ReadLine();
@@ -131,26 +110,22 @@ class Minimercado
         }
     }
 
-    // ============================================================
-    // MENÚ: CONTADOR
-    // ============================================================
     static void MenuContador()
     {
         bool salir = false;
         while (salir == false)
         {
             Console.Clear();
-            Console.WriteLine("╔══════════════════════════════════════╗");
-            Console.WriteLine("║        MINIMERCADO TECH              ║");
-            Console.WriteLine("║         Panel Contador               ║");
-            Console.WriteLine($"║  Usuario: {nombreActual,-26}║");
-            Console.WriteLine("╠══════════════════════════════════════╣");
-            Console.WriteLine("║  1. Ver Catalogo e Inventario        ║");
-            Console.WriteLine("║  2. Ver Registro de Ventas           ║");
-            Console.WriteLine("║  3. Estadisticas y Balance           ║");
-            Console.WriteLine("║  4. Exportar Inventario a Excel      ║");
-            Console.WriteLine("║  0. Cerrar Sesion                    ║");
-            Console.WriteLine("╚══════════════════════════════════════╝");
+            Console.WriteLine("MINIMERCADO TECH - Panel Contador");
+            Console.WriteLine($"Usuario: {nombreActual}");
+            Console.WriteLine();
+            Console.WriteLine("1. Ver Catalogo e Inventario");
+            Console.WriteLine("2. Ver Registro de Ventas");
+            Console.WriteLine("3. Estadisticas y Balance");
+            Console.WriteLine("4. Exportar Inventario a Excel");
+            Console.WriteLine();
+            Console.WriteLine("0. Cerrar Sesion");
+            Console.WriteLine();
             Console.Write("Seleccione una opcion: ");
 
             string opcion = Console.ReadLine();
@@ -172,28 +147,24 @@ class Minimercado
         }
     }
 
-    // ============================================================
-    // MENÚ: CLIENTE
-    // ============================================================
     static void MenuCliente()
     {
         bool salir = false;
         while (salir == false)
         {
             Console.Clear();
-            Console.WriteLine("╔══════════════════════════════════════╗");
-            Console.WriteLine("║        MINIMERCADO TECH              ║");
-            Console.WriteLine("║         Panel Cliente                ║");
-            Console.WriteLine($"║  Usuario: {nombreActual,-26}║");
-            Console.WriteLine("╠══════════════════════════════════════╣");
-            Console.WriteLine("║  1. Ver Catalogo                     ║");
-            Console.WriteLine("║  2. Buscar Producto                  ║");
-            Console.WriteLine("║  3. Agregar al Carrito               ║");
-            Console.WriteLine("║  4. Ver Carrito                      ║");
-            Console.WriteLine("║  5. Eliminar del Carrito             ║");
-            Console.WriteLine("║  6. Realizar Compra                  ║");
-            Console.WriteLine("║  0. Cerrar Sesion                    ║");
-            Console.WriteLine("╚══════════════════════════════════════╝");
+            Console.WriteLine("MINIMERCADO TECH - Panel Cliente");
+            Console.WriteLine($"Usuario: {nombreActual}");
+            Console.WriteLine();
+            Console.WriteLine("1. Ver Catalogo");
+            Console.WriteLine("2. Buscar Producto");
+            Console.WriteLine("3. Agregar al Carrito");
+            Console.WriteLine("4. Ver Carrito");
+            Console.WriteLine("5. Eliminar del Carrito");
+            Console.WriteLine("6. Realizar Compra");
+            Console.WriteLine();
+            Console.WriteLine("0. Cerrar Sesion");
+            Console.WriteLine();
             Console.Write("Seleccione una opcion: ");
 
             string opcion = Console.ReadLine();
@@ -217,9 +188,6 @@ class Minimercado
         }
     }
 
-    // ============================================================
-    // FUNCIÓN: CARGAR DATOS INICIALES
-    // ============================================================
     static void CargarDatosIniciales()
     {
         AgregarUsuarioInterno("admin",    "admin123",  "admin",    "Administrador");
@@ -256,17 +224,13 @@ class Minimercado
         usuarioNombres.Add(nombre);
     }
 
-    // ============================================================
-    // FUNCIÓN: LOGIN
-    // ============================================================
     static void Login()
     {
         Console.Clear();
-        Console.WriteLine("╔══════════════════════════════════╗");
-        Console.WriteLine("║     MINIMERCADO TECH  v1.0       ║");
-        Console.WriteLine("║    Tu tienda de computadoras     ║");
-        Console.WriteLine("╚══════════════════════════════════╝");
-        Console.WriteLine("=== INICIO DE SESION ===");
+        Console.WriteLine("MINIMERCADO TECH v1.0");
+        Console.WriteLine("Tu tienda de computadoras");
+        Console.WriteLine();
+        Console.WriteLine("Inicio de sesion:");
 
         int intentos    = 0;
         int maxIntentos = 3;
@@ -313,9 +277,6 @@ class Minimercado
         }
     }
 
-    // ============================================================
-    // FUNCIÓN: LEER PASSWORD OCULTA
-    // ============================================================
     static string LeerPasswordOculta()
     {
         string password = "";
@@ -331,9 +292,6 @@ class Minimercado
         return password;
     }
 
-    // ============================================================
-    // FUNCIÓN: CERRAR SESIÓN
-    // ============================================================
     static void CerrarSesion()
     {
         Console.WriteLine($"Cerrando sesion de {nombreActual}...");
@@ -342,14 +300,11 @@ class Minimercado
         Console.WriteLine("Sesion cerrada. Hasta pronto!");
     }
 
-    // ============================================================
-    // FUNCIÓN: MOSTRAR CATÁLOGO
-    // ============================================================
     static void MostrarCatalogo()
     {
-        Console.WriteLine("=== CATALOGO DE PRODUCTOS ===");
+        Console.WriteLine("Catalogo de Productos");
         Console.WriteLine($"{"ID",-5} {"Nombre",-28} {"Categoria",-15} {"Precio",12} {"Stock",6}");
-        Console.WriteLine(new string('-', 70));
+        Console.WriteLine();
 
         for (int i = 0; i < productoIds.Count; i++)
         {
@@ -360,21 +315,18 @@ class Minimercado
             Console.WriteLine($"{productoIds[i],-5} {productoNombres[i],-28} {productoCategorias[i],-15} ${productoPrecios[i],11:N0} {productoStocks[i],6}{alerta}");
         }
 
-        Console.WriteLine(new string('-', 70));
+        Console.WriteLine();
         Console.WriteLine($"Total de productos: {productoIds.Count}");
     }
 
-    // ============================================================
-    // FUNCIÓN: BUSCAR PRODUCTO
-    // ============================================================
     static void BuscarProducto()
     {
-        Console.WriteLine("=== BUSCADOR DE PRODUCTOS ===");
+        Console.WriteLine("Buscador de Productos");
         Console.Write("Ingresa nombre o categoria a buscar: ");
         string termino    = Console.ReadLine().ToLower();
         bool encontroAlgo = false;
 
-        Console.WriteLine(new string('-', 70));
+        Console.WriteLine();
         for (int i = 0; i < productoIds.Count; i++)
         {
             if (productoNombres[i].ToLower().Contains(termino) || productoCategorias[i].ToLower().Contains(termino))
@@ -385,12 +337,9 @@ class Minimercado
         }
 
         if (encontroAlgo == false) Console.WriteLine($"No se encontraron productos con '{termino}'");
-        Console.WriteLine(new string('-', 70));
+        Console.WriteLine();
     }
 
-    // ============================================================
-    // FUNCIÓN AUXILIAR: BUSCAR ÍNDICE POR ID
-    // ============================================================
     static int BuscarIndicePorId(int id)
     {
         for (int i = 0; i < productoIds.Count; i++)
@@ -398,12 +347,9 @@ class Minimercado
         return -1;
     }
 
-    // ============================================================
-    // CRUD - AGREGAR PRODUCTO
-    // ============================================================
     static void AgregarProductoManual()
     {
-        Console.WriteLine("=== AGREGAR NUEVO PRODUCTO ===");
+        Console.WriteLine("Agregar Nuevo Producto");
         MostrarCatalogo();
 
         Console.Write("\nNombre del producto: ");
@@ -427,12 +373,9 @@ class Minimercado
         Console.WriteLine($"Producto '{nombre}' agregado con ID {nuevoId}.");
     }
 
-    // ============================================================
-    // CRUD - EDITAR PRODUCTO
-    // ============================================================
     static void EditarProducto()
     {
-        Console.WriteLine("=== EDITAR PRODUCTO ===");
+        Console.WriteLine("Editar Producto");
         MostrarCatalogo();
 
         Console.Write("\nIngresa el ID del producto a editar: ");
@@ -471,12 +414,9 @@ class Minimercado
         Console.WriteLine("Producto actualizado correctamente.");
     }
 
-    // ============================================================
-    // CRUD - ELIMINAR PRODUCTO
-    // ============================================================
     static void EliminarProducto()
     {
-        Console.WriteLine("=== ELIMINAR PRODUCTO ===");
+        Console.WriteLine("Eliminar Producto");
         MostrarCatalogo();
 
         Console.Write("\nIngresa el ID del producto a eliminar: ");
@@ -494,26 +434,20 @@ class Minimercado
         Console.WriteLine($"Producto '{nombreEliminado}' eliminado.");
     }
 
-    // ============================================================
-    // GESTIÓN USUARIOS - VER
-    // ============================================================
     static void MostrarUsuarios()
     {
-        Console.WriteLine("=== LISTA DE USUARIOS ===");
+        Console.WriteLine("Lista de Usuarios");
         Console.WriteLine($"{"#",-4} {"Username",-15} {"Nombre",-20} {"Rol",-12}");
-        Console.WriteLine(new string('-', 55));
+        Console.WriteLine();
         for (int i = 0; i < usuarioUsernames.Count; i++)
             Console.WriteLine($"{i + 1,-4} {usuarioUsernames[i],-15} {usuarioNombres[i],-20} {usuarioRoles[i],-12}");
-        Console.WriteLine(new string('-', 55));
+        Console.WriteLine();
         Console.WriteLine($"Total usuarios: {usuarioUsernames.Count}");
     }
 
-    // ============================================================
-    // GESTIÓN USUARIOS - AGREGAR
-    // ============================================================
     static void AgregarUsuario()
     {
-        Console.WriteLine("=== AGREGAR USUARIO ===");
+        Console.WriteLine("Agregar Usuario");
 
         Console.Write("Username: ");
         string username = Console.ReadLine();
@@ -539,12 +473,9 @@ class Minimercado
         Console.WriteLine($"Usuario '{username}' agregado con rol '{rol}'.");
     }
 
-    // ============================================================
-    // GESTIÓN USUARIOS - EDITAR
-    // ============================================================
     static void EditarUsuario()
     {
-        Console.WriteLine("=== EDITAR USUARIO ===");
+        Console.WriteLine("Editar Usuario");
         MostrarUsuarios();
 
         Console.Write("\nIngresa el username a editar: ");
@@ -582,12 +513,9 @@ class Minimercado
         Console.WriteLine("Usuario actualizado correctamente.");
     }
 
-    // ============================================================
-    // GESTIÓN USUARIOS - ELIMINAR
-    // ============================================================
     static void EliminarUsuario()
     {
-        Console.WriteLine("=== ELIMINAR USUARIO ===");
+        Console.WriteLine("Eliminar Usuario");
         MostrarUsuarios();
 
         Console.Write("\nIngresa el username a eliminar: ");
@@ -610,15 +538,12 @@ class Minimercado
         Console.WriteLine($"Usuario '{username}' eliminado.");
     }
 
-    // ============================================================
-    // FUNCIÓN: AGREGAR AL CARRITO
-    // ============================================================
     static void AgregarAlCarrito()
     {
         bool seguirAgregando = true;
         while (seguirAgregando == true)
         {
-            Console.WriteLine("=== AGREGAR AL CARRITO ===");
+            Console.WriteLine("Agregar al Carrito");
             MostrarCatalogo();
 
             Console.Write("\nID del producto a agregar (0 para salir): ");
@@ -677,16 +602,13 @@ class Minimercado
         }
     }
 
-    // ============================================================
-    // FUNCIÓN: MOSTRAR CARRITO
-    // ============================================================
     static void MostrarCarrito()
     {
-        Console.WriteLine("=== CARRITO DE COMPRAS ===");
+        Console.WriteLine("Carrito de Compras");
         if (carritoIds.Count == 0) { Console.WriteLine("El carrito esta vacio."); return; }
 
         Console.WriteLine($"{"#",-4} {"Producto",-28} {"Precio",12} {"Cant",6} {"Subtotal",14}");
-        Console.WriteLine(new string('-', 68));
+        Console.WriteLine();
 
         double total = 0;
         for (int i = 0; i < carritoIds.Count; i++)
@@ -696,13 +618,10 @@ class Minimercado
             total = total + subtotal;
         }
 
-        Console.WriteLine(new string('-', 68));
+        Console.WriteLine();
         Console.WriteLine($"{"TOTAL:",-52} ${total,13:N0}");
     }
 
-    // ============================================================
-    // FUNCIÓN: ELIMINAR DEL CARRITO
-    // ============================================================
     static void EliminarDelCarrito()
     {
         if (carritoIds.Count == 0) { Console.WriteLine("El carrito esta vacio."); return; }
@@ -734,12 +653,9 @@ class Minimercado
         carritoPrecios.Clear(); carrritoCantidades.Clear();
     }
 
-    // ============================================================
-    // FUNCIÓN: MÉTODO DE PAGO
-    // ============================================================
     static string SeleccionarMetodoPago(double total)
     {
-        Console.WriteLine("\n=== METODO DE PAGO ===");
+        Console.WriteLine("Metodo de Pago");
         Console.WriteLine($"Total a pagar: ${total:N0}");
         Console.WriteLine("1. Efectivo");
         Console.WriteLine("2. Tarjeta de Credito");
@@ -766,12 +682,9 @@ class Minimercado
         return metodo;
     }
 
-    // ============================================================
-    // FUNCIÓN: REALIZAR COMPRA
-    // ============================================================
     static void RealizarCompra()
     {
-        Console.WriteLine("=== PROCESO DE COMPRA ===");
+        Console.WriteLine("Proceso de Compra");
         if (carritoIds.Count == 0) { Console.WriteLine("El carrito esta vacio."); return; }
 
         MostrarCarrito();
@@ -807,24 +720,19 @@ class Minimercado
         LimpiarCarrito();
     }
 
-    // ============================================================
-    // FUNCIÓN: IMPRIMIR FACTURA
-    // ============================================================
     static void ImprimirFactura(int numero, string cliente, string fecha, double total, string metodo)
     {
         Console.WriteLine();
-        Console.WriteLine("╔══════════════════════════════════════════════════╗");
-        Console.WriteLine("║              MINIMERCADO TECH                   ║");
-        Console.WriteLine("║          NIT: 900.123.456-7                     ║");
-        Console.WriteLine("║       Calle 45 #23-10, Medellin                 ║");
-        Console.WriteLine("╠══════════════════════════════════════════════════╣");
-        Console.WriteLine($"║  Factura N: {numero:D6}                             ║");
-        Console.WriteLine($"║  Fecha: {fecha}                      ║");
-        Console.WriteLine($"║  Cliente: {cliente,-38}║");
-        Console.WriteLine($"║  Pago: {metodo,-41}║");
-        Console.WriteLine("╠══════════════════════════════════════════════════╣");
-        Console.WriteLine($"║  {"Producto",-24} {"Cant",4} {"P.Unit",10} {"Subtotal",9} ║");
-        Console.WriteLine("╠══════════════════════════════════════════════════╣");
+        Console.WriteLine("MINIMERCADO TECH");
+        Console.WriteLine("NIT: 900.123.456-7");
+        Console.WriteLine("Calle 45 #23-10, Medellin");
+        Console.WriteLine();
+        Console.WriteLine($"Factura N: {numero:D6}");
+        Console.WriteLine($"Fecha: {fecha}");
+        Console.WriteLine($"Cliente: {cliente}");
+        Console.WriteLine($"Pago: {metodo}");
+        Console.WriteLine();
+        Console.WriteLine($"{"Producto",-24} {"Cant",4} {"P.Unit",10} {"Subtotal",9}");
 
         for (int i = 0; i < carritoIds.Count; i++)
         {
@@ -833,18 +741,15 @@ class Minimercado
             else nombre = carritoNombres[i];
 
             double subtotal = carritoPrecios[i] * carrritoCantidades[i];
-            Console.WriteLine($"║  {nombre,-24} {carrritoCantidades[i],4} {carritoPrecios[i],9:N0} {subtotal,9:N0} ║");
+            Console.WriteLine($"  {nombre,-24} {carrritoCantidades[i],4} {carritoPrecios[i],9:N0} {subtotal,9:N0}");
         }
 
-        Console.WriteLine("╠══════════════════════════════════════════════════╣");
-        Console.WriteLine($"║  {"TOTAL A PAGAR:",-35} ${total,10:N0} ║");
-        Console.WriteLine("╚══════════════════════════════════════════════════╝");
-        Console.WriteLine("     Gracias por su compra en MinimercadoTech!     ");
+        Console.WriteLine();
+        Console.WriteLine($"TOTAL A PAGAR: ${total:N0}");
+        Console.WriteLine();
+        Console.WriteLine("Gracias por su compra en MinimercadoTech!");
     }
 
-    // ============================================================
-    // FUNCIÓN: GUARDAR FACTURA EN ARCHIVO TXT
-    // ============================================================
     static void GuardarFacturaEnArchivo(int numero, string cliente, string fecha, double total, string metodo)
     {
         string nombreArchivo = $"factura_{numero:D6}.txt";
@@ -867,16 +772,13 @@ class Minimercado
         Console.WriteLine($"Factura guardada en: {nombreArchivo}");
     }
 
-    // ============================================================
-    // FUNCIÓN: MOSTRAR REGISTRO DE VENTAS
-    // ============================================================
     static void MostrarRegistroVentas()
     {
-        Console.WriteLine("=== REGISTRO DE VENTAS ===");
+        Console.WriteLine("Registro de Ventas");
         if (ventaNumeros.Count == 0) { Console.WriteLine("No hay ventas registradas."); return; }
 
         Console.WriteLine($"{"N° Venta",-10} {"Cliente",-15} {"Fecha",-22} {"Metodo",-22} {"Total",14}");
-        Console.WriteLine(new string('-', 87));
+        Console.WriteLine();
 
         double totalGeneral = 0;
         for (int i = 0; i < ventaNumeros.Count; i++)
@@ -885,7 +787,7 @@ class Minimercado
             totalGeneral = totalGeneral + ventaTotales[i];
         }
 
-        Console.WriteLine(new string('-', 87));
+        Console.WriteLine();
         Console.WriteLine($"Total de ventas: {ventaNumeros.Count}");
         Console.WriteLine($"Recaudo total:   ${totalGeneral:N0}");
 
@@ -910,9 +812,9 @@ class Minimercado
         Console.WriteLine($"Cliente : {ventaClientes[iv]}");
         Console.WriteLine($"Fecha   : {ventaFechas[iv]}");
         Console.WriteLine($"Pago    : {ventaMetodos[iv]}");
-        Console.WriteLine(new string('-', 55));
+        Console.WriteLine();
         Console.WriteLine($"{"Producto",-25} {"Cant",5} {"P.Unit",12} {"Subtotal",12}");
-        Console.WriteLine(new string('-', 55));
+        Console.WriteLine();
 
         string[] productos = ventaDetalles[iv].Split(',');
         for (int i = 0; i < productos.Length; i++)
@@ -925,16 +827,13 @@ class Minimercado
             Console.WriteLine($"{nombreProd,-25} {cantProd,5} ${precioProd,11:N0} ${subtotal,11:N0}");
         }
 
-        Console.WriteLine(new string('-', 55));
+        Console.WriteLine();
         Console.WriteLine($"{"TOTAL:",-44} ${ventaTotales[iv],11:N0}");
     }
 
-    // ============================================================
-    // FUNCIÓN: ESTADÍSTICAS Y BALANCE
-    // ============================================================
     static void MostrarEstadisticas()
     {
-        Console.WriteLine("=== ESTADISTICAS Y BALANCE ===");
+        Console.WriteLine("Estadisticas y Balance");
         if (ventaNumeros.Count == 0) { Console.WriteLine("No hay ventas registradas aun."); return; }
 
         double totalVendido = 0; double ventaMayor = 0; double ventaMenor = ventaTotales[0];
@@ -965,50 +864,33 @@ class Minimercado
             else if (productoStocks[i] <= 3)  productosStockBajo = productosStockBajo + 1;
         }
 
-        Console.WriteLine(new string('=', 45));
-        Console.WriteLine("  RESUMEN DE VENTAS");
-        Console.WriteLine(new string('=', 45));
+        Console.WriteLine("RESUMEN DE VENTAS");
         Console.WriteLine($"  Total de ventas realizadas : {ventaNumeros.Count}");
         Console.WriteLine($"  Total recaudado            : ${totalVendido:N0}");
         Console.WriteLine($"  Promedio por venta         : ${promedioVenta:N0}");
         Console.WriteLine($"  Venta mas alta             : ${ventaMayor:N0}");
         Console.WriteLine($"  Venta mas baja             : ${ventaMenor:N0}");
         Console.WriteLine($"  Cliente con mayor compra   : {clienteTop} (${ventaMayorVal:N0})");
-        Console.WriteLine(new string('-', 45));
-        Console.WriteLine("  METODOS DE PAGO");
-        Console.WriteLine(new string('-', 45));
+        Console.WriteLine("METODOS DE PAGO");
         Console.WriteLine($"  Efectivo                   : {cantEfectivo} ventas");
         Console.WriteLine($"  Tarjeta de Credito         : {cantCredito} ventas");
         Console.WriteLine($"  Tarjeta de Debito          : {cantDebito} ventas");
         Console.WriteLine($"  Transferencia Bancaria     : {cantTransferencia} ventas");
-        Console.WriteLine(new string('-', 45));
-        Console.WriteLine("  ESTADO DEL INVENTARIO");
-        Console.WriteLine(new string('-', 45));
+        Console.WriteLine("ESTADO DEL INVENTARIO");
         Console.WriteLine($"  Total de productos         : {productoIds.Count}");
         Console.WriteLine($"  Productos agotados         : {productosAgotados}");
         Console.WriteLine($"  Productos con stock bajo   : {productosStockBajo}");
-        Console.WriteLine(new string('=', 45));
+        Console.WriteLine();
     }
 
-    // ============================================================
-    // FUNCIÓN: EXPORTAR INVENTARIO A EXCEL
-    // Genera un archivo inventario.xlsx con dos hojas:
-    // Hoja 1 = productos, Hoja 2 = ventas
-    // ============================================================
     static void ExportarInventarioExcel()
     {
-        Console.WriteLine("=== EXPORTAR A EXCEL ===");
+        Console.WriteLine("Exportar a Excel");
 
-        // XLWorkbook es la "clase libro de Excel" que da ClosedXML
-        // Es como un archivo Excel en memoria
         XLWorkbook libro = new XLWorkbook();
 
-        // ── HOJA 1: INVENTARIO ──────────────────────────────────
-        // .Worksheets.Add("nombre") crea una hoja nueva con ese nombre
         IXLWorksheet hojaInventario = libro.Worksheets.Add("Inventario");
 
-        // Escribimos los encabezados en la fila 1
-        // .Cell(fila, columna) selecciona una celda
         hojaInventario.Cell(1, 1).Value = "ID";
         hojaInventario.Cell(1, 2).Value = "Nombre";
         hojaInventario.Cell(1, 3).Value = "Categoria";
@@ -1016,15 +898,12 @@ class Minimercado
         hojaInventario.Cell(1, 5).Value = "Stock";
         hojaInventario.Cell(1, 6).Value = "Estado";
 
-        // Damos estilo a la fila de encabezados
-        // .Range("A1", "F1") selecciona un rango de celdas
         IXLRange encabezadoInventario = hojaInventario.Range("A1", "F1");
         encabezadoInventario.Style.Fill.BackgroundColor      = XLColor.FromHtml("#1F4E79");
         encabezadoInventario.Style.Font.FontColor            = XLColor.White;
         encabezadoInventario.Style.Font.Bold                 = true;
         encabezadoInventario.Style.Alignment.Horizontal      = XLAlignmentHorizontalValues.Center;
 
-        // Escribimos los datos de cada producto empezando en la fila 2
         for (int i = 0; i < productoIds.Count; i++)
         {
             int fila = i + 2; // fila 2, 3, 4...
@@ -1035,36 +914,29 @@ class Minimercado
             hojaInventario.Cell(fila, 4).Value = productoPrecios[i];
             hojaInventario.Cell(fila, 5).Value = productoStocks[i];
 
-            // Calculamos el estado según el stock
             string estado = "Disponible";
             if (productoStocks[i] == 0)       estado = "AGOTADO";
             else if (productoStocks[i] <= 3)  estado = "STOCK BAJO";
 
             hojaInventario.Cell(fila, 6).Value = estado;
 
-            // Colorear filas alternas para que sea más fácil de leer
             if (i % 2 == 0)
             {
                 hojaInventario.Range(fila, 1, fila, 6).Style.Fill.BackgroundColor = XLColor.FromHtml("#EBF3FB");
             }
 
-            // Colorear en rojo si está agotado, amarillo si stock bajo
             if (productoStocks[i] == 0)
                 hojaInventario.Range(fila, 1, fila, 6).Style.Fill.BackgroundColor = XLColor.FromHtml("#FCE4D6");
             else if (productoStocks[i] <= 3)
                 hojaInventario.Range(fila, 1, fila, 6).Style.Fill.BackgroundColor = XLColor.FromHtml("#FFF2CC");
 
-            // Formato de moneda para la columna de precio
             hojaInventario.Cell(fila, 4).Style.NumberFormat.Format = "$#,##0";
         }
 
-        // Ajustamos el ancho de las columnas al contenido automáticamente
         hojaInventario.Columns().AdjustToContents();
 
-        // Fijamos la primera fila para que al hacer scroll siempre se vean los encabezados
         hojaInventario.SheetView.FreezeRows(1);
 
-        // ── HOJA 2: VENTAS ──────────────────────────────────────
         IXLWorksheet hojaVentas = libro.Worksheets.Add("Ventas");
 
         hojaVentas.Cell(1, 1).Value = "N Venta";
@@ -1090,8 +962,6 @@ class Minimercado
             {
                 int fila = i + 2;
 
-                // Reconstruimos el texto de productos desde ventaDetalles
-                // El detalle está guardado como "nombre|cant|precio,nombre|cant|precio"
                 string[] items          = ventaDetalles[i].Split(',');
                 string   resumenItems   = "";
                 for (int j = 0; j < items.Length; j++)
@@ -1118,24 +988,17 @@ class Minimercado
         hojaVentas.Columns().AdjustToContents();
         hojaVentas.SheetView.FreezeRows(1);
 
-        // ── GUARDAMOS EL ARCHIVO ────────────────────────────────
         string nombreArchivo = $"inventario_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
 
-        // .SaveAs() guarda el libro en disco con el nombre que le dimos
         libro.SaveAs(nombreArchivo);
 
         Console.WriteLine($"Archivo exportado: {nombreArchivo}");
         Console.WriteLine($"Ubicacion: {Directory.GetCurrentDirectory()}\\{nombreArchivo}");
     }
 
-    // ============================================================
-    // FUNCIÓN: IMPORTAR INVENTARIO DESDE EXCEL
-    // Lee un archivo .xlsx y reemplaza el catálogo actual
-    // El archivo debe tener el mismo formato que el exportado
-    // ============================================================
     static void ImportarInventarioExcel()
     {
-        Console.WriteLine("=== IMPORTAR DESDE EXCEL ===");
+        Console.WriteLine("Importar desde Excel");
         Console.WriteLine("IMPORTANTE: El archivo debe tener el mismo formato que el exportado.");
         Console.WriteLine("Columnas requeridas: ID | Nombre | Categoria | Precio | Stock");
         Console.WriteLine();
@@ -1143,7 +1006,6 @@ class Minimercado
         Console.Write("Nombre del archivo a importar (ej: inventario.xlsx): ");
         string nombreArchivo = Console.ReadLine();
 
-        // Verificamos que el archivo exista antes de abrirlo
         if (File.Exists(nombreArchivo) == false)
         {
             Console.WriteLine($"El archivo '{nombreArchivo}' no se encontro.");
@@ -1154,8 +1016,6 @@ class Minimercado
         Console.Write("Esto reemplazara el catalogo actual. Deseas continuar? (s/n): ");
         if (Console.ReadLine().ToLower() != "s") { Console.WriteLine("Importacion cancelada."); return; }
 
-        // Listas temporales donde guardamos los datos leídos
-        // Si algo falla, no tocamos el catálogo real hasta el final
         List<int>    idsTemp        = new List<int>();
         List<string> nombresTemp    = new List<string>();
         List<string> categoriasTemp = new List<string>();
@@ -1165,25 +1025,18 @@ class Minimercado
         int productosLeidos = 0;
         int errores         = 0;
 
-        // Abrimos el archivo Excel
         XLWorkbook libro = new XLWorkbook(nombreArchivo);
 
-        // Tomamos la primera hoja (Inventario)
         IXLWorksheet hoja = libro.Worksheet(1);
 
-        // .RowsUsed() devuelve solo las filas que tienen datos
-        // .Skip(1) saltamos la fila 1 que es el encabezado
         foreach (IXLRow fila in hoja.RowsUsed().Skip(1))
         {
-            // Leemos cada celda de la fila
-            // .GetValue<tipo>() convierte la celda al tipo que necesitamos
             string celdaId       = fila.Cell(1).GetValue<string>().Trim();
             string celdaNombre   = fila.Cell(2).GetValue<string>().Trim();
             string celdaCateg    = fila.Cell(3).GetValue<string>().Trim();
             string celdaPrecio   = fila.Cell(4).GetValue<string>().Trim();
             string celdaStock    = fila.Cell(5).GetValue<string>().Trim();
 
-            // Validamos que los datos sean correctos antes de agregarlos
             if (int.TryParse(celdaId, out int id) == false)
             { Console.WriteLine($"Fila {fila.RowNumber()}: ID invalido '{celdaId}', se omite."); errores = errores + 1; continue; }
 
@@ -1199,7 +1052,6 @@ class Minimercado
             if (int.TryParse(celdaStock, out int stock) == false || stock < 0)
             { Console.WriteLine($"Fila {fila.RowNumber()}: Stock invalido '{celdaStock}', se omite."); errores = errores + 1; continue; }
 
-            // Si todo está bien, lo guardamos en las listas temporales
             idsTemp.Add(id);
             nombresTemp.Add(celdaNombre);
             categoriasTemp.Add(celdaCateg);
@@ -1214,7 +1066,6 @@ class Minimercado
             return;
         }
 
-        // Si llegamos aquí, los datos están bien - reemplazamos el catálogo
         productoIds.Clear();
         productoNombres.Clear();
         productoCategorias.Clear();
