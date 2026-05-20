@@ -9,16 +9,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <!--
-    ClosedXML es la librería para manejar archivos Excel (.xlsx)
-    Al tener esta línea aquí, cualquiera que abra el proyecto
-    en Visual Studio verá una notificación para restaurar paquetes,
-    o puede hacer clic derecho en el proyecto y elegir
-    "Restore NuGet Packages" y se instala automáticamente.
-    No es necesario instalar nada manualmente.
-  -->
-  <ItemGroup>
-    <PackageReference Include="ClosedXML" Version="0.102.2" />
-  </ItemGroup>
-
 </Project>
