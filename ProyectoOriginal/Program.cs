@@ -37,8 +37,12 @@ class Minimercado
     static void Main(string[] args)
     {
         CargarDatosIniciales();
-        Login();
-        MostrarMenuSegunRol();
+
+        while (true)
+        {
+            Login();
+            MostrarMenuSegunRol();
+        }
     }
 
     static void MostrarMenuSegunRol()
@@ -54,7 +58,7 @@ class Minimercado
         while (salir == false)
         {
             Console.Clear();
-            Console.WriteLine("MINIMERCADO TECH - Panel Administrador");
+            Console.WriteLine("Panel Administrador");
             Console.WriteLine($"Usuario: {nombreActual}");
             Console.WriteLine();
             Console.WriteLine("--- PRODUCTOS ---");
@@ -116,7 +120,7 @@ class Minimercado
         while (salir == false)
         {
             Console.Clear();
-            Console.WriteLine("MINIMERCADO TECH - Panel Contador");
+            Console.WriteLine("Panel Contador");
             Console.WriteLine($"Usuario: {nombreActual}");
             Console.WriteLine();
             Console.WriteLine("1. Ver Catalogo e Inventario");
@@ -153,7 +157,7 @@ class Minimercado
         while (salir == false)
         {
             Console.Clear();
-            Console.WriteLine("MINIMERCADO TECH - Panel Cliente");
+            Console.WriteLine("Panel Cliente");
             Console.WriteLine($"Usuario: {nombreActual}");
             Console.WriteLine();
             Console.WriteLine("1. Ver Catalogo");
@@ -227,13 +231,11 @@ class Minimercado
     static void Login()
     {
         Console.Clear();
-        Console.WriteLine("MINIMERCADO TECH v1.0");
-        Console.WriteLine("Tu tienda de computadoras");
-        Console.WriteLine();
         Console.WriteLine("Inicio de sesion:");
 
         int intentos    = 0;
         int maxIntentos = 3;
+        sesionActiva    = false;
 
         while (sesionActiva == false && intentos < maxIntentos)
         {
@@ -272,8 +274,9 @@ class Minimercado
 
         if (sesionActiva == false)
         {
-            Console.WriteLine("Demasiados intentos fallidos. El sistema se cerrara.");
-            Environment.Exit(0);
+            Console.WriteLine("Demasiados intentos fallidos.");
+            Console.WriteLine("Presione cualquier tecla para intentar de nuevo...");
+            Console.ReadKey();
         }
     }
 
@@ -294,10 +297,11 @@ class Minimercado
 
     static void CerrarSesion()
     {
-        Console.WriteLine($"Cerrando sesion de {nombreActual}...");
-        sesionActiva = false; usuarioActual = ""; rolActual = ""; nombreActual = "";
+        sesionActiva = false;
+        usuarioActual = "";
+        rolActual = "";
+        nombreActual = "";
         LimpiarCarrito();
-        Console.WriteLine("Sesion cerrada. Hasta pronto!");
     }
 
     static void MostrarCatalogo()
