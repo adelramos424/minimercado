@@ -1,0 +1,19 @@
+# Carpetas que genera Visual Studio automáticamente
+# No se suben a GitHub porque se regeneran solas
+bin/
+obj/
+
+# Archivos de configuración local de Visual Studio
+.vs/
+*.user
+*.suo
+
+# Facturas generadas por el programa (archivos de texto)
+factura_*.txt
+
+# Archivos Excel exportados por el programa
+inventario_*.xlsx
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
