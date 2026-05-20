@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using ClosedXML.Excel;   // Librería para Excel - se instala via NuGet
 
 class Minimercado
 {
@@ -78,10 +77,6 @@ class Minimercado
             Console.WriteLine("10. Editar Usuario");
             Console.WriteLine("11. Eliminar Usuario");
             Console.WriteLine();
-            Console.WriteLine("--- EXCEL ---");
-            Console.WriteLine("12. Exportar Inventario a Excel");
-            Console.WriteLine("13. Importar Inventario desde Excel");
-            Console.WriteLine();
             Console.WriteLine("0.  Cerrar Sesion");
             Console.WriteLine();
             Console.Write("Seleccione una opcion: ");
@@ -100,8 +95,6 @@ class Minimercado
                 case "9":  AgregarUsuario();             break;
                 case "10": EditarUsuario();              break;
                 case "11": EliminarUsuario();            break;
-                case "12": ExportarInventarioExcel();    break;
-                case "13": ImportarInventarioExcel();    break;
                 case "0":  CerrarSesion(); salir = true; break;
                 default:   Console.WriteLine("Opcion no valida."); break;
             }
@@ -126,7 +119,6 @@ class Minimercado
             Console.WriteLine("1. Ver Catalogo e Inventario");
             Console.WriteLine("2. Ver Registro de Ventas");
             Console.WriteLine("3. Estadisticas y Balance");
-            Console.WriteLine("4. Exportar Inventario a Excel");
             Console.WriteLine();
             Console.WriteLine("0. Cerrar Sesion");
             Console.WriteLine();
@@ -138,7 +130,6 @@ class Minimercado
                 case "1": MostrarCatalogo();         break;
                 case "2": MostrarRegistroVentas();   break;
                 case "3": MostrarEstadisticas();     break;
-                case "4": ExportarInventarioExcel(); break;
                 case "0": CerrarSesion(); salir = true; break;
                 default:  Console.WriteLine("Opcion no valida."); break;
             }
@@ -887,207 +878,6 @@ class Minimercado
         Console.WriteLine();
     }
 
-    static void ExportarInventarioExcel()
-    {
-        Console.WriteLine("Exportar a Excel");
 
-        XLWorkbook libro = new XLWorkbook();
 
-        IXLWorksheet hojaInventario = libro.Worksheets.Add("Inventario");
-
-        hojaInventario.Cell(1, 1).Value = "ID";
-        hojaInventario.Cell(1, 2).Value = "Nombre";
-        hojaInventario.Cell(1, 3).Value = "Categoria";
-        hojaInventario.Cell(1, 4).Value = "Precio";
-        hojaInventario.Cell(1, 5).Value = "Stock";
-        hojaInventario.Cell(1, 6).Value = "Estado";
-
-        IXLRange encabezadoInventario = hojaInventario.Range("A1", "F1");
-        encabezadoInventario.Style.Fill.BackgroundColor      = XLColor.FromHtml("#1F4E79");
-        encabezadoInventario.Style.Font.FontColor            = XLColor.White;
-        encabezadoInventario.Style.Font.Bold                 = true;
-        encabezadoInventario.Style.Alignment.Horizontal      = XLAlignmentHorizontalValues.Center;
-
-        for (int i = 0; i < productoIds.Count; i++)
-        {
-            int fila = i + 2; // fila 2, 3, 4...
-
-            hojaInventario.Cell(fila, 1).Value = productoIds[i];
-            hojaInventario.Cell(fila, 2).Value = productoNombres[i];
-            hojaInventario.Cell(fila, 3).Value = productoCategorias[i];
-            hojaInventario.Cell(fila, 4).Value = productoPrecios[i];
-            hojaInventario.Cell(fila, 5).Value = productoStocks[i];
-
-            string estado = "Disponible";
-            if (productoStocks[i] == 0)       estado = "AGOTADO";
-            else if (productoStocks[i] <= 3)  estado = "STOCK BAJO";
-
-            hojaInventario.Cell(fila, 6).Value = estado;
-
-            if (i % 2 == 0)
-            {
-                hojaInventario.Range(fila, 1, fila, 6).Style.Fill.BackgroundColor = XLColor.FromHtml("#EBF3FB");
-            }
-
-            if (productoStocks[i] == 0)
-                hojaInventario.Range(fila, 1, fila, 6).Style.Fill.BackgroundColor = XLColor.FromHtml("#FCE4D6");
-            else if (productoStocks[i] <= 3)
-                hojaInventario.Range(fila, 1, fila, 6).Style.Fill.BackgroundColor = XLColor.FromHtml("#FFF2CC");
-
-            hojaInventario.Cell(fila, 4).Style.NumberFormat.Format = "$#,##0";
-        }
-
-        hojaInventario.Columns().AdjustToContents();
-
-        hojaInventario.SheetView.FreezeRows(1);
-
-        IXLWorksheet hojaVentas = libro.Worksheets.Add("Ventas");
-
-        hojaVentas.Cell(1, 1).Value = "N Venta";
-        hojaVentas.Cell(1, 2).Value = "Cliente";
-        hojaVentas.Cell(1, 3).Value = "Fecha";
-        hojaVentas.Cell(1, 4).Value = "Metodo de Pago";
-        hojaVentas.Cell(1, 5).Value = "Productos";
-        hojaVentas.Cell(1, 6).Value = "Total";
-
-        IXLRange encabezadoVentas = hojaVentas.Range("A1", "F1");
-        encabezadoVentas.Style.Fill.BackgroundColor = XLColor.FromHtml("#1D6033");
-        encabezadoVentas.Style.Font.FontColor       = XLColor.White;
-        encabezadoVentas.Style.Font.Bold            = true;
-        encabezadoVentas.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-
-        if (ventaNumeros.Count == 0)
-        {
-            hojaVentas.Cell(2, 1).Value = "No hay ventas registradas";
-        }
-        else
-        {
-            for (int i = 0; i < ventaNumeros.Count; i++)
-            {
-                int fila = i + 2;
-
-                string[] items          = ventaDetalles[i].Split(',');
-                string   resumenItems   = "";
-                for (int j = 0; j < items.Length; j++)
-                {
-                    string[] partes = items[j].Split('|');
-                    if (j > 0) resumenItems = resumenItems + ", ";
-                    resumenItems = resumenItems + partes[0] + " x" + partes[1];
-                }
-
-                hojaVentas.Cell(fila, 1).Value = ventaNumeros[i].ToString("D6");
-                hojaVentas.Cell(fila, 2).Value = ventaClientes[i];
-                hojaVentas.Cell(fila, 3).Value = ventaFechas[i];
-                hojaVentas.Cell(fila, 4).Value = ventaMetodos[i];
-                hojaVentas.Cell(fila, 5).Value = resumenItems;
-                hojaVentas.Cell(fila, 6).Value = ventaTotales[i];
-
-                hojaVentas.Cell(fila, 6).Style.NumberFormat.Format = "$#,##0";
-
-                if (i % 2 == 0)
-                    hojaVentas.Range(fila, 1, fila, 6).Style.Fill.BackgroundColor = XLColor.FromHtml("#E8F5E9");
-            }
-        }
-
-        hojaVentas.Columns().AdjustToContents();
-        hojaVentas.SheetView.FreezeRows(1);
-
-        string nombreArchivo = $"inventario_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
-
-        libro.SaveAs(nombreArchivo);
-
-        Console.WriteLine($"Archivo exportado: {nombreArchivo}");
-        Console.WriteLine($"Ubicacion: {Directory.GetCurrentDirectory()}\\{nombreArchivo}");
-    }
-
-    static void ImportarInventarioExcel()
-    {
-        Console.WriteLine("Importar desde Excel");
-        Console.WriteLine("IMPORTANTE: El archivo debe tener el mismo formato que el exportado.");
-        Console.WriteLine("Columnas requeridas: ID | Nombre | Categoria | Precio | Stock");
-        Console.WriteLine();
-
-        Console.Write("Nombre del archivo a importar (ej: inventario.xlsx): ");
-        string nombreArchivo = Console.ReadLine();
-
-        if (File.Exists(nombreArchivo) == false)
-        {
-            Console.WriteLine($"El archivo '{nombreArchivo}' no se encontro.");
-            Console.WriteLine($"Asegurate de que este en la carpeta: {Directory.GetCurrentDirectory()}");
-            return;
-        }
-
-        Console.Write("Esto reemplazara el catalogo actual. Deseas continuar? (s/n): ");
-        if (Console.ReadLine().ToLower() != "s") { Console.WriteLine("Importacion cancelada."); return; }
-
-        List<int>    idsTemp        = new List<int>();
-        List<string> nombresTemp    = new List<string>();
-        List<string> categoriasTemp = new List<string>();
-        List<double> preciosTemp    = new List<double>();
-        List<int>    stocksTemp     = new List<int>();
-
-        int productosLeidos = 0;
-        int errores         = 0;
-
-        XLWorkbook libro = new XLWorkbook(nombreArchivo);
-
-        IXLWorksheet hoja = libro.Worksheet(1);
-
-        foreach (IXLRow fila in hoja.RowsUsed().Skip(1))
-        {
-            string celdaId       = fila.Cell(1).GetValue<string>().Trim();
-            string celdaNombre   = fila.Cell(2).GetValue<string>().Trim();
-            string celdaCateg    = fila.Cell(3).GetValue<string>().Trim();
-            string celdaPrecio   = fila.Cell(4).GetValue<string>().Trim();
-            string celdaStock    = fila.Cell(5).GetValue<string>().Trim();
-
-            if (int.TryParse(celdaId, out int id) == false)
-            { Console.WriteLine($"Fila {fila.RowNumber()}: ID invalido '{celdaId}', se omite."); errores = errores + 1; continue; }
-
-            if (celdaNombre == "")
-            { Console.WriteLine($"Fila {fila.RowNumber()}: Nombre vacio, se omite."); errores = errores + 1; continue; }
-
-            if (celdaCateg == "")
-            { Console.WriteLine($"Fila {fila.RowNumber()}: Categoria vacia, se omite."); errores = errores + 1; continue; }
-
-            if (double.TryParse(celdaPrecio, out double precio) == false || precio <= 0)
-            { Console.WriteLine($"Fila {fila.RowNumber()}: Precio invalido '{celdaPrecio}', se omite."); errores = errores + 1; continue; }
-
-            if (int.TryParse(celdaStock, out int stock) == false || stock < 0)
-            { Console.WriteLine($"Fila {fila.RowNumber()}: Stock invalido '{celdaStock}', se omite."); errores = errores + 1; continue; }
-
-            idsTemp.Add(id);
-            nombresTemp.Add(celdaNombre);
-            categoriasTemp.Add(celdaCateg);
-            preciosTemp.Add(precio);
-            stocksTemp.Add(stock);
-            productosLeidos = productosLeidos + 1;
-        }
-
-        if (productosLeidos == 0)
-        {
-            Console.WriteLine("No se encontraron productos validos en el archivo. El catalogo no fue modificado.");
-            return;
-        }
-
-        productoIds.Clear();
-        productoNombres.Clear();
-        productoCategorias.Clear();
-        productoPrecios.Clear();
-        productoStocks.Clear();
-
-        for (int i = 0; i < idsTemp.Count; i++)
-        {
-            productoIds.Add(idsTemp[i]);
-            productoNombres.Add(nombresTemp[i]);
-            productoCategorias.Add(categoriasTemp[i]);
-            productoPrecios.Add(preciosTemp[i]);
-            productoStocks.Add(stocksTemp[i]);
-        }
-
-        Console.WriteLine($"\nImportacion completada:");
-        Console.WriteLine($"  Productos importados : {productosLeidos}");
-        Console.WriteLine($"  Filas con errores    : {errores}");
-        Console.WriteLine("\nCatalogo actualizado. Usa 'Ver Catalogo' para verificar.");
-    }
 }
