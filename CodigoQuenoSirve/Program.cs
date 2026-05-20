@@ -34,15 +34,20 @@ class Minimercado
     static bool   sesionActiva   = false;
     static int    contadorVentas = 1;
 
+    static bool salirPrograma = false;
+
     static void Main(string[] args)
     {
         CargarDatosIniciales();
 
-        while (true)
+        while (salirPrograma == false)
         {
             Login();
-            MostrarMenuSegunRol();
+            if (salirPrograma == false)
+                MostrarMenuSegunRol();
         }
+
+        Console.WriteLine("Hasta luego!");
     }
 
     static void MostrarMenuSegunRol()
@@ -83,6 +88,7 @@ class Minimercado
             Console.WriteLine("13. Importar Inventario desde Excel");
             Console.WriteLine();
             Console.WriteLine("0.  Cerrar Sesion");
+            Console.WriteLine("-1. Salir del programa");
             Console.WriteLine();
             Console.Write("Seleccione una opcion: ");
 
@@ -103,6 +109,7 @@ class Minimercado
                 case "12": ExportarInventarioExcel();    break;
                 case "13": ImportarInventarioExcel();    break;
                 case "0":  CerrarSesion(); salir = true; break;
+                case "-1": CerrarSesion(); salir = true; salirPrograma = true; break;
                 default:   Console.WriteLine("Opcion no valida."); break;
             }
 
@@ -128,7 +135,8 @@ class Minimercado
             Console.WriteLine("3. Estadisticas y Balance");
             Console.WriteLine("4. Exportar Inventario a Excel");
             Console.WriteLine();
-            Console.WriteLine("0. Cerrar Sesion");
+            Console.WriteLine("0.  Cerrar Sesion");
+            Console.WriteLine("-1. Salir del programa");
             Console.WriteLine();
             Console.Write("Seleccione una opcion: ");
 
@@ -139,7 +147,8 @@ class Minimercado
                 case "2": MostrarRegistroVentas();   break;
                 case "3": MostrarEstadisticas();     break;
                 case "4": ExportarInventarioExcel(); break;
-                case "0": CerrarSesion(); salir = true; break;
+                case "0":  CerrarSesion(); salir = true; break;
+                case "-1": CerrarSesion(); salir = true; salirPrograma = true; break;
                 default:  Console.WriteLine("Opcion no valida."); break;
             }
 
@@ -167,7 +176,8 @@ class Minimercado
             Console.WriteLine("5. Eliminar del Carrito");
             Console.WriteLine("6. Realizar Compra");
             Console.WriteLine();
-            Console.WriteLine("0. Cerrar Sesion");
+            Console.WriteLine("0.  Cerrar Sesion");
+            Console.WriteLine("-1. Salir del programa");
             Console.WriteLine();
             Console.Write("Seleccione una opcion: ");
 
@@ -180,7 +190,8 @@ class Minimercado
                 case "4": MostrarCarrito();     break;
                 case "5": EliminarDelCarrito(); break;
                 case "6": RealizarCompra();     break;
-                case "0": CerrarSesion(); salir = true; break;
+                case "0":  CerrarSesion(); salir = true; break;
+                case "-1": CerrarSesion(); salir = true; salirPrograma = true; break;
                 default:  Console.WriteLine("Opcion no valida."); break;
             }
 
